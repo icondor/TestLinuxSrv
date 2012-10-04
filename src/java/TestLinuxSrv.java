@@ -34,7 +34,7 @@ public class TestLinuxSrv {
 	private static final String HOST="";
 	private static final String PORT="1";
 	private static final String USER="";
-	private static final String PWD="";
+	private static final String PWD="p";
 	
 
 	
