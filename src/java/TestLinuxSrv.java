@@ -31,9 +31,9 @@ import java.util.concurrent.TimeUnit;
 /** This examples demonstrates how a remote command can be executed. */
 public class TestLinuxSrv {
 
-	private static final String HOST="";
+	private static final String HOST="h";
 	private static final String PORT="1";
-	private static final String USER="";
+	private static final String USER="u";
 	private static final String PWD="p";
 	
 
@@ -73,7 +73,7 @@ public class TestLinuxSrv {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    e.printStackTrace();
                 }
             } catch (ConnectionException ex) {
                 System.out.println("ddddd");
