@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 public class TestLinuxSrv {
 
-	private static final int TIMEOUT = 1000;
+	private static final int TIMEOUT = Messages.getInt("TestLinuxSrv.TIMEOUT");
 	private static final String HOST = Messages.getString("TestLinuxSrv.HOST"); 
 	private static final String PORT = Messages.getString("TestLinuxSrv.PORT"); 
 	private static final String USER = Messages.getString("TestLinuxSrv.USER"); 

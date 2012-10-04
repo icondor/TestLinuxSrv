@@ -14,7 +14,17 @@ public class Messages {
 		try {
 			return RESOURCE_BUNDLE.getString(key);
 		} catch (MissingResourceException e) {
+			e.printStackTrace();
 			return '!' + key + '!';
+		}
+	}
+	
+	public static int getInt(String key) {
+		try {
+			return Integer.getInteger(RESOURCE_BUNDLE.getString(key));
+		} catch (MissingResourceException e) {
+			e.printStackTrace();
+			return -1;
 		}
 	}
 }
