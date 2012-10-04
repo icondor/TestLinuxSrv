@@ -11,7 +11,7 @@ import java.security.PublicKey;
 import java.util.concurrent.TimeUnit;
 
 /**
- * IDC
+ * IDC, 10/05/2012
  */
 
 public class TestLinuxSrv {
@@ -59,7 +59,7 @@ public class TestLinuxSrv {
 						e.printStackTrace();
 					}
 				} catch (ConnectionException ex) {
-					System.out.println("ddddd");
+					System.out.println("dddddd");
 					ex.printStackTrace();
 				} finally {
 					System.out.println("ooooo");
