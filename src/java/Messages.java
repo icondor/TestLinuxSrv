@@ -21,7 +21,7 @@ public class Messages {
 	
 	public static int getInt(String key) {
 		try {
-			return Integer.getInteger(RESOURCE_BUNDLE.getString(key));
+			return Integer.parseInt(RESOURCE_BUNDLE.getString(key));
 		} catch (MissingResourceException e) {
 			e.printStackTrace();
 			return -1;

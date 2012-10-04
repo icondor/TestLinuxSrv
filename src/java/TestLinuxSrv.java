@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 public class TestLinuxSrv {
 
-	private static final int TIMEOUT = Messages.getInt("TestLinuxSrv.TIMEOUT");
+	private static final int TIMEOUT = Messages.getInt("TestLinuxSrv.TIMEOUTMILLIS");
 	private static final String HOST = Messages.getString("TestLinuxSrv.HOST"); 
 	private static final String PORT = Messages.getString("TestLinuxSrv.PORT"); 
 	private static final String USER = Messages.getString("TestLinuxSrv.USER"); 
@@ -47,8 +47,7 @@ public class TestLinuxSrv {
 	}
 
 	public static void executeTest(final SSHClient ssh)
-			throws UserAuthException, TransportException, ConnectionException,
-			IOException {
+			 {
 		try {
 			ssh.authPassword(USER, PWD);
 			boolean exp = false;
@@ -75,9 +74,18 @@ public class TestLinuxSrv {
 					session.close();
 				}
 			} while (exp == false);
-		} finally {
+		}
+		catch(Exception e){
+			System.out.println(Messages.getString("TestLinuxSrv.AUTH_COMMUNICATION"));
+			e.printStackTrace();
+		}
+		finally {
 			System.out.println(Messages.getString("TestLinuxSrv.FINAL_APP"));
-			ssh.disconnect();
+			try {
+				ssh.disconnect();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
