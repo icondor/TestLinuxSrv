@@ -16,24 +16,33 @@ import java.util.concurrent.TimeUnit;
 
 public class TestLinuxSrv {
 
-	private static final String HOST = "h";
-	private static final String PORT = "1";
-	private static final String USER = "u";
-	private static final String PWD = "p";
+	private static final int TIMEOUT = 1000;
+	private static final String HOST = Messages.getString("TestLinuxSrv.HOST"); 
+	private static final String PORT = Messages.getString("TestLinuxSrv.PORT"); 
+	private static final String USER = Messages.getString("TestLinuxSrv.USER"); 
+	private static final String PWD = Messages.getString("TestLinuxSrv.PWD"); 
 
 	public static void main(String... args) throws IOException {
 		final SSHClient ssh = init();
 		executeTest(ssh);
 	}
 
-	public static SSHClient init() throws IOException {
+	public static SSHClient init() {
 		final SSHClient ssh = new SSHClient();
 		ssh.addHostKeyVerifier(new HostKeyVerifier() {
 			public boolean verify(String arg0, int arg1, PublicKey arg2) {
 				return true; // don't bother verifying
 			}
 		});
-		ssh.connect(HOST, Integer.parseInt(PORT));
+		try {
+			ssh.connect(HOST, Integer.parseInt(PORT));
+		} catch (NumberFormatException e) {
+			System.out.println(Messages.getString("TestLinuxSrv.PORT_NUMBER_FORMAT_EXP"));
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println(Messages.getString("TestLinuxSrv.CONNECTION_NOT_POSSIBLE"));
+			e.printStackTrace();
+		}
 		return ssh;
 	}
 
@@ -46,28 +55,28 @@ public class TestLinuxSrv {
 			do {
 				final Session session = ssh.startSession();
 				try {
-					final Session.Command cmd = session.exec("whoami");
+					final Session.Command cmd = session.exec(Messages.getString("TestLinuxSrv.LINUXCMD")); 
 					System.out.println(IOUtils.readFully(cmd.getInputStream())
 							.toString());
 					cmd.join(15, TimeUnit.SECONDS);
 					// System.out.println("\n** exit status: " +
 					// cmd.getExitStatus());
-					System.out.println("----");
+					System.out.println(Messages.getString("TestLinuxSrv.END_OF_CYCLE_SIGN"));
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(TIMEOUT);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 				} catch (ConnectionException ex) {
-					System.out.println("dddddd");
+					System.out.println(Messages.getString("TestLinuxSrv.CONNEXP")); 
 					ex.printStackTrace();
 				} finally {
-					System.out.println("ooooo");
+					System.out.println(Messages.getString("TestLinuxSrv.FINAL_LOOP")); 
 					session.close();
 				}
 			} while (exp == false);
 		} finally {
-			System.out.println("aaaaa");
+			System.out.println(Messages.getString("TestLinuxSrv.FINAL_APP"));
 			ssh.disconnect();
 		}
 	}
